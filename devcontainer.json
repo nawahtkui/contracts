@@ -1,0 +1,19 @@
+{
+  "name": "Nawah Contracts Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-18",
+  "features": {
+    "ghcr.io/devcontainers/features/hardhat:1": {}
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [8545],
+  "remoteUser": "vscode",
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "juanblanco.solidity"
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "solidity.compileUsingRemoteVersion": "latest"
+  }
+}
