@@ -1,0 +1,43 @@
+hardhat-build.ymlname: Hardhat CI for Contracts
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  hardhat:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]  # إصدارات مدعومة بشكل رسمي
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile Contracts
+        run: npx hardhat compile
+
+      - name: Run tests (if exist)
+        run: |
+          if grep -q "\"test\"" package.json; then
+            npx hardhat test
+          else
+            echo "No tests found — skipping."
+          fi
+
+      # مثال للنشر (اختياري)
+      # - name: Deploy to BSC Testnet
+      #   env:
+      #     PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      #     BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
+      #   run: npx hardhat run --network testnet scripts/deploy.js
