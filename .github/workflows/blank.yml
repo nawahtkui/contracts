@@ -1,36 +1,48 @@
-# This is a basic workflow to help you get started with Actions
+name: CI/CD Smart Contracts
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-testnet-deploy:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.x
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install dependencies
+        run: npm install
+
+      - name: Ensure contracts folder exists
+        run: mkdir -p contracts
+
+      - name: Compile contracts
+        run: npx hardhat compile
+
+      - name: Run tests
+        run: npx hardhat test
+
+      - name: Lint Solidity
+        run: npx solhint "contracts/**/*.sol"
+
+      - name: Deploy to BSC Testnet
+        if: github.ref == 'refs/heads/main'  # نشر فقط من الفرع الرئيسي
+        env:
+          PRIVATE_KEY: ${{ secrets.BSC_TESTNET_PRIVATE_KEY }}
+          BSC_TESTNET_RPC: ${{ secrets.BSC_TESTNET_RPC }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          npx hardhat run scripts/deploy.js --network bscTestnet
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hardhat-build
+          path: artifacts
