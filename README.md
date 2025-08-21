@@ -20,7 +20,7 @@ Always use the .env.example file as a reference to create your local .env file, 
 
 Nawah Hardhat Contracts Pack (EN Fixed)
 
-A clean, production‑ready set of files to replace the Arabic‑identifier drafts. Includes:
+
 contracts/
 
 ├─ Storage.sol
