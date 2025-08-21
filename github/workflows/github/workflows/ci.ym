@@ -1,0 +1,39 @@
+name: Smart Contracts CI/CD
+
+
+on:
+push:
+branches: ["main"]
+pull_request:
+branches: ["main"]
+
+
+jobs:
+build-test-deploy:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Setup Node.js
+uses: actions/setup-node@v4
+with:
+node-version: 18.x
+- name: Install dependencies
+run: npm install
+- name: Compile contracts
+run: npx hardhat compile
+- name: Run tests
+run: npx hardhat test
+- name: Lint Solidity
+run: npx solhint "contracts/**/*.sol" || true
+- name: Deploy to BSC Testnet (main branch only)
+if: github.ref == 'refs/heads/main'
+env:
+BSC_TESTNET_PRIVATE_KEY: ${{ secrets.BSC_TESTNET_PRIVATE_KEY }}
+BSC_TESTNET_RPC: ${{ secrets.BSC_TESTNET_RPC }}
+run: |
+npx hardhat run scripts/deploy.js --network bscTestnet
+- name: Upload artifacts
+uses: actions/upload-artifact@v4
+with:
+name: hardhat-artifacts
+path: artifacts
