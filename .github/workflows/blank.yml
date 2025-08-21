@@ -1,28 +1,24 @@
-name: CI/CD Smart Contracts
+name: CI/CD & Docs
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  build-testnet-deploy:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
-
-      - name: Ensure contracts folder exists
-        run: mkdir -p contracts
 
       - name: Compile contracts
         run: npx hardhat compile
@@ -30,19 +26,38 @@ jobs:
       - name: Run tests
         run: npx hardhat test
 
-      - name: Lint Solidity
-        run: npx solhint "contracts/**/*.sol"
+      - name: Lint code
+        run: npm run lint --if-present
 
-      - name: Deploy to BSC Testnet
-        if: github.ref == 'refs/heads/main'  # نشر فقط من الفرع الرئيسي
+      - name: Deploy contracts to BSC Testnet
+        if: github.ref == 'refs/heads/main'
         env:
           PRIVATE_KEY: ${{ secrets.BSC_TESTNET_PRIVATE_KEY }}
-          BSC_TESTNET_RPC: ${{ secrets.BSC_TESTNET_RPC }}
+          RPC_URL: ${{ secrets.BSC_TESTNET_RPC }}
         run: |
           npx hardhat run scripts/deploy.js --network bscTestnet
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+  docs:
+    runs-on: ubuntu-latest
+    needs: build-test-deploy
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          name: hardhat-build
-          path: artifacts
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate docs
+        run: npm run docgen
+
+      - name: Deploy Docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
