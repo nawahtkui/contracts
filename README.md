@@ -18,30 +18,3 @@ Always use the .env.example file as a reference to create your local .env file, 
 2. Deploy via a proxy (UUPS or Transparent)
 3. Call `initialize()` (no parameters needed) — it will assign msg.sender as the owner, feeCollector, and supportFund.
 
-Nawah Hardhat Contracts Pack (EN Fixed)
-
-
-contracts/
-
-├─ Storage.sol
-
-├─ Owner.sol
-
-└─ Ballot.sol
-
-scripts/
-
-└─ deploy.js
-
-.github/workflows/
-
-└─ ci.yml
-
-hardhat.config.js
-
-package.json (sample)
-
-.env.example (sample)
-
-
-
