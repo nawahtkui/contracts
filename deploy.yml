@@ -1,0 +1,27 @@
+name: Deploy NawahToken
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # ضبط Node.js مدعوم من Hardhat
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # تثبيت dependencies
+      - run: npm install
+
+      # تشغيل سكريبت النشر على شبكة BSC Testnet
+      - name: Deploy to BSC Testnet
+        env:
+          BSC_TESTNET_URL: ${{ secrets.BSC_TESTNET_URL }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: npx hardhat run scripts/deploy.js --network bscTestnet
