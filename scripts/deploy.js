@@ -1,23 +1,24 @@
-/* eslint-disable no-console */
+// scripts/deploy.js
 const hre = require("hardhat");
 
-
 async function main() {
-const [deployer] = await hre.ethers.getSigners();
-console.log("Deploying contracts with account:", deployer.address);
+  console.log("📦 Deploying NawahToken...");
 
+  // الحصول على مصنع العقد
+  const Token = await hre.ethers.getContractFactory("NawahToken");
 
-// Example: deploy Storage; change to your contract as needed
-const Storage = await hre.ethers.getContractFactory("Storage");
-const storage = await Storage.deploy();
-await storage.deployed();
+  // نشر العقد
+  const token = await Token.deploy();
 
+  // الانتظار حتى ينتهي النشر
+  await token.deployed();
 
-console.log("Storage deployed to:", storage.address);
+  // طباعة العنوان النهائي
+  console.log("✅ NawahToken deployed to:", token.address);
 }
 
-
-main().catch((error) => {
-console.error(error);
-process.exitCode = 1;
-});
+main()
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
