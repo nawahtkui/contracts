@@ -1,16 +1,14 @@
-name: Deploy NawahToken to BSC Testnet
+name: Deploy NawahToken
 
 on:
   push:
     branches:
       - main
+      - develop
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      BSCTESTNET_URL: ${{ secrets.BSCTESTNET_URL }}
 
     steps:
       - name: Checkout repository
@@ -30,5 +28,16 @@ jobs:
       - name: Run Tests
         run: npx hardhat test
 
-      - name: Deploy to BSC Testnet
-        run: npx hardhat run scripts/deploy.js --network bsctestnet
+      - name: Deploy to network
+        run: |
+          if [ "${GITHUB_REF##*/}" = "main" ]; then
+            echo "Deploying to BSC Mainnet"
+            npx hardhat run scripts/deploy.js --network bsc
+          else
+            echo "Deploying to BSC Testnet"
+            npx hardhat run scripts/deploy.js --network bsctestnet
+          fi
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          BSCTESTNET_URL: ${{ secrets.BSCTESTNET_URL }}
+          BSCMAINNET_URL: ${{ secrets.BSCMAINNET_URL }}
