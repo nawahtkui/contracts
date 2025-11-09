@@ -1,78 +1,114 @@
 
-🤝 Contributing to Nawah Token (NWTK) 
 
-Thank you for your interest in contributing to Nawah Token — a project that blends technology, culture, and empowerment to shape the next era of blockchain innovation.
-We welcome developers, artists, researchers, and organizations who share our mission of merging heritage and humanity with Web3.
+## 🪙 Nawah Token (NWTK) — Smart Contracts Repository
 
-🌱 Guiding Principles 
+### ⚡ Empowering Innovation, Culture & Humanity through Blockchain
 
-Our contribution philosophy is rooted in:
+![Nawah Token Banner](https://github.com/nawahtkui/.github/blob/main/profile/banner.png)
 
-Transparency — Every change should be documented and auditable.
+---
 
-Security — Code must follow OpenZeppelin and Hardhat security best practices.
+### 🧩 Overview
 
-Cultural Respect — All contributions should align with Nawah’s mission of honoring diversity and empowerment.
+**Nawah Token (NWTK)** is a next-generation digital asset designed to merge **financial innovation**, **cultural heritage**, and **social empowerment** — especially focusing on **women and youth**.
+This repository contains the **smart contract suite** powering Nawah’s ecosystem, written with OpenZeppelin’s upgradeable framework for security and scalability.
 
-Collaboration — We believe in open communication and collective growth.
+---
 
-🧩 How to Contribute 1. Fork & Clone the Repository git clone git@github.com:nawahtkui/contracts.git cd contracts 2. Create a Feature Branch git checkout -b feature/your-feature-name 3. Make Your Changes 
+### 🛠️ Features
 
-Follow Solidity best practices.
+* 🪙 **Upgradeable ERC20 Contract** (UUPS-compatible).
+* 💰 **Dynamic Fee System** — supporting community and cultural funds.
+* 🤝 **Transparent Governance** through `Ownable` and multi-signature wallets.
+* 🔒 **Security & Compliance** aligned with modern DeFi standards.
+* 🌍 **Web3 Integration Ready** for DApps and NFT platforms.
 
-Include NatSpec comments for public functions.
+---
 
-Run npx hardhat test before submitting.
+### 🧱 Repository Structure
 
-4. Commit and Push git add . git commit -m "Add: short description of your change" git push origin feature/your-feature-name 5. Open a Pull Request 
+```
+contracts/
+│
+├── NawahToken.sol              # Core ERC20 Upgradeable Contract
+├── extensions/                 # Future smart contracts (Staking, Options, etc.)
+├── interfaces/                 # Interfaces for ecosystem integration
+├── scripts/                    # Deployment and upgrade scripts
+└── test/                       # Hardhat test suites
 
-Once pushed, open a Pull Request (PR) to the main branch.
-Make sure your PR includes:
+.github/
+└── workflows/deploy.yml        # Continuous deployment configuration
 
-A clear description of your update.
+docs/
+├── SECURITY.md
+├── Tokenomics.md
+└── Whitepaper.pdf
+```
 
-Linked issue number (if applicable).
+---
 
-Verification that all tests pass.
+### 🚀 Deployment
 
-🧠 Code Style & Testing 
+To deploy on **BSC Testnet**, create an `.env` file:
 
-Use Solidity 0.8.20+
+```bash
+BSCTESTNET_URL=https://data-seed-prebsc-1-s1.binance.org:8545/
+PRIVATE_KEY=your_wallet_private_key
+```
 
-Follow OpenZeppelin Guidelines
+Then run:
 
-Run tests before committing:
+```bash
+npx hardhat run scripts/deploy.js --network bsctestnet
+```
 
-npx hardhat test 
+---
 
-If adding new functionality, create or extend test files under /test.
+### 📜 Smart Contract
 
-🔐 Security Disclosure 
+> **Name:** Nawah Token
+> **Symbol:** NWTK
+> **Total Supply:** 100,000,000 NWTK
+> **License:** MIT
+> **Blockchain:** Binance Smart Chain (Upgradeable)
 
-If you discover a security vulnerability, please do not open a public issue.
-Instead, report it privately via:
-📧 security@nawahtoken.org
+---
 
-Our team will acknowledge and address verified vulnerabilities promptly.
+### 🧠 Vision
 
-🌸 Recognition 
+> “Nawah” (نواة) means *seed* — the origin of growth.
+> It symbolizes the birth of new ideas, creativity, and empowerment through technology.
+> This project aims to bridge civilizations and honor human legacy in the Web3 era.
 
-Contributors whose work enhances Nawah’s ecosystem — whether technical, artistic, or social — may be featured in:
+---
 
-Our official website and GitHub organization.
+### 🤝 Contributing
 
-Nawah NFT Rewards (symbolic digital tokens of appreciation).
+We welcome developers, artists, and cultural organizations to collaborate.
+Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for guidelines.
 
-🌍 Join the Movement 
+💬 Join the discussion in **GitHub Discussions** or contact us via:
 
-“Nawah is more than a token — it’s a bridge between civilizations, empowering innovation with purpose.”
+* 🌐 [nawahtkui.github.io](https://nawahtkui.github.io)
+* 📧 [contact@nawahtoken.org](mailto:contact@nawahtoken.org)
+* 🕊️ [Twitter/X](https://twitter.com/nawahtoken)
 
-Follow us and stay involved:
+---
 
-🌐 Website
+### 🔐 Security
 
-🧱 Smart Contracts Repo
+For details on contract safety, ownership, and transparency, please read [`SECURITY.md`](./SECURITY.md).
 
-💬 GitHub Discussions (coming soon)
+---
 
-🕊️ Twitter/X
+### 🪶 License
+
+This project is licensed under the **MIT License** — open for educational, technical, and social innovation use.
+
+---
+
+### 🌸 A Cultural Blockchain Vision
+
+> “From heritage to future — Nawah empowers creativity, wisdom, and equality through digital innovation.”
+
+---
