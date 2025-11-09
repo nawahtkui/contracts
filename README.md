@@ -1,32 +1,78 @@
-# Nawah Token — UUPS Upgradeable
 
-This repository contains the NawahToken (NWTK) smart contract configured as a UUPS-upgradeable ERC20 token with transaction fees and separate support/fee collectors.
+🤝 Contributing to Nawah Token (NWTK) 
 
-## Contents
-- `contracts/NawahToken.sol` — upgradeable ERC20 implementing UUPS + ReentrancyGuard.
-- `scripts/deploy_nawah.js` — Hardhat deploy script using `@openzeppelin/hardhat-upgrades`.
-- `test/` — example tests (included).
-- `hardhat.config.js`, `package.json`, `.env.example`.
+Thank you for your interest in contributing to Nawah Token — a project that blends technology, culture, and empowerment to shape the next era of blockchain innovation.
+We welcome developers, artists, researchers, and organizations who share our mission of merging heritage and humanity with Web3.
 
-## Quickstart
-1. Install dependencies:
-```bash
-npm install
-```
+🌱 Guiding Principles 
 
-2. Rename `.env.example` to `.env` and fill `BSCTESTNET_URL` and `PRIVATE_KEY`.
+Our contribution philosophy is rooted in:
 
-3. Deploy to testnet:
-```bash
-npm run deploy:bsctestnet
-```
+Transparency — Every change should be documented and auditable.
 
-4. Run tests:
-```bash
-npm test
-```
+Security — Code must follow OpenZeppelin and Hardhat security best practices.
 
-## Security notes
-- Use multisig for `feeCollector` and `supportFund`.
-- Test upgrades on testnets before mainnet.
-- Consider third-party audits before large value deployments.
+Cultural Respect — All contributions should align with Nawah’s mission of honoring diversity and empowerment.
+
+Collaboration — We believe in open communication and collective growth.
+
+🧩 How to Contribute 1. Fork & Clone the Repository git clone git@github.com:nawahtkui/contracts.git cd contracts 2. Create a Feature Branch git checkout -b feature/your-feature-name 3. Make Your Changes 
+
+Follow Solidity best practices.
+
+Include NatSpec comments for public functions.
+
+Run npx hardhat test before submitting.
+
+4. Commit and Push git add . git commit -m "Add: short description of your change" git push origin feature/your-feature-name 5. Open a Pull Request 
+
+Once pushed, open a Pull Request (PR) to the main branch.
+Make sure your PR includes:
+
+A clear description of your update.
+
+Linked issue number (if applicable).
+
+Verification that all tests pass.
+
+🧠 Code Style & Testing 
+
+Use Solidity 0.8.20+
+
+Follow OpenZeppelin Guidelines
+
+Run tests before committing:
+
+npx hardhat test 
+
+If adding new functionality, create or extend test files under /test.
+
+🔐 Security Disclosure 
+
+If you discover a security vulnerability, please do not open a public issue.
+Instead, report it privately via:
+📧 security@nawahtoken.org
+
+Our team will acknowledge and address verified vulnerabilities promptly.
+
+🌸 Recognition 
+
+Contributors whose work enhances Nawah’s ecosystem — whether technical, artistic, or social — may be featured in:
+
+Our official website and GitHub organization.
+
+Nawah NFT Rewards (symbolic digital tokens of appreciation).
+
+🌍 Join the Movement 
+
+“Nawah is more than a token — it’s a bridge between civilizations, empowering innovation with purpose.”
+
+Follow us and stay involved:
+
+🌐 Website
+
+🧱 Smart Contracts Repo
+
+💬 GitHub Discussions (coming soon)
+
+🕊️ Twitter/X
