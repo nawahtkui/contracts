@@ -1,34 +1,17 @@
 {
-
-"name": "nawah-contracts",
-
-"version": "1.0.0",
-
-"private": true,
-
-"scripts": {
-
-"build": "hardhat compile",
-
-"test": "hardhat test",
-
-"lint:sol": "solhint 'contracts/**/*.sol'",
-
-"deploy:testnet": "hardhat run scripts/deploy.js --network bscTestnet"
-
-},
-
-"devDependencies": {
-
-"@nomicfoundation/hardhat-toolbox": "^5.0.0",
-
-"dotenv": "^16.4.5",
-
-"hardhat": "^2.22.10",
-
-"solhint": "^4.5.4"
-
+  "name": "nawah-token-upgradeable",
+  "version": "1.0.0",
+  "description": "Nawah Token (NWTK) \u2014 UUPS upgradeable ERC20 with fees",
+  "scripts": {
+    "test": "npx hardhat test",
+    "deploy:bsctestnet": "npx hardhat run scripts/deploy_nawah.js --network bsctestnet"
+  },
+  "devDependencies": {
+    "hardhat": "^2.14.0",
+    "@nomiclabs/hardhat-ethers": "^3.0.0",
+    "ethers": "^6.0.0",
+    "@openzeppelin/hardhat-upgrades": "^2.0.0",
+    "@openzeppelin/contracts-upgradeable": "^4.9.0",
+    "chai": "^4.3.0"
+  }
 }
-
-}
-
